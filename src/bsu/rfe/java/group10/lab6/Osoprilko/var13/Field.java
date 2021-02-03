@@ -1,6 +1,7 @@
 package bsu.rfe.java.group10.lab6.Osoprilko.var13;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,6 +20,13 @@ public class Field extends JPanel {
             repaint();
         }
     });
+    // Конструктор класса BouncingBall
+    public Field() {
+// Установить цвет заднего фона белым
+        setBackground(Color.WHITE);
+// Запустить таймер перерисовки области
+        repaintTimer.start();
+    }
 
 
 }
