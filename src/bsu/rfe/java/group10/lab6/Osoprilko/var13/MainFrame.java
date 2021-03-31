@@ -76,9 +76,6 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent event)
             {
                 field.setMinimaze(minimazeMenuItem.isSelected());
-                // свойство showAxis класса GraphicsDisplay истина, если элемент меню
-                // showAxisMenuItem отмечен флажком, и ложь - в противном случае
-                //display.setShowRotate(minimazeMenuItem.isSelected());
             }
         };
         minimazeMenuItem = new JCheckBoxMenuItem(minimazeAction);

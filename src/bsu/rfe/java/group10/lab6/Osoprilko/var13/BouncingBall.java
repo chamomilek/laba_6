@@ -3,8 +3,6 @@ package bsu.rfe.java.group10.lab6.Osoprilko.var13;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
-import static com.sun.scenario.effect.impl.state.GaussianRenderState.MAX_RADIUS;
-
 public class BouncingBall implements Runnable{
     private static final int MAX_RADIUS = 40;
     // Минимальный радиус, который может иметь мяч
@@ -136,7 +134,6 @@ public class BouncingBall implements Runnable{
 // Если нас прервали, то просто выходим (завершаемся)
         }
     }
-
     // Метод прорисовки самого себя
     public void paint(Graphics2D canvas) {
         canvas.setColor(color);
