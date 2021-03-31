@@ -11,6 +11,8 @@ public class Field extends JPanel {
     private ArrayList<BouncingBall> balls = new ArrayList<BouncingBall>(10);
     // Флаг приостановленности движения
     private boolean paused;
+    // Флаг уменьшения
+    private boolean minimaze;
     // Класс таймер отвечает за регулярную генерацию события типа ActionEvent
 // При создании его экземпляра используется анонимный класс,
 // реализующий интерфейс ActionListener
@@ -39,6 +41,12 @@ public class Field extends JPanel {
         Graphics2D canvas = (Graphics2D) g;
 // Последовательно запросить прорисовку от всех мячей, хранимых в списке
         for (BouncingBall ball: balls) {
+            if(minimaze)
+            {
+                ball.setMinimaze(true);
+            }
+            else
+                ball.setMinimaze(false);
             ball.paint(canvas);
         }
     }
@@ -63,5 +71,9 @@ public class Field extends JPanel {
         paused = false;
 // Будим все ожидающие продолжения потоки
         notifyAll();
+    }
+    public synchronized void setMinimaze(boolean showMinimaze)
+    {
+        this.minimaze = showMinimaze;
     }
 }

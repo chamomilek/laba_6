@@ -8,7 +8,7 @@ import static com.sun.scenario.effect.impl.state.GaussianRenderState.MAX_RADIUS;
 public class BouncingBall implements Runnable{
     private static final int MAX_RADIUS = 40;
     // Минимальный радиус, который может иметь мяч
-    private static final int MIN_RADIUS = 3;
+    private static final int MIN_RADIUS = 1;
     // Максимальная скорость, с которой может летать мяч
     private static final int MAX_SPEED = 15;
     private Field field;
@@ -21,6 +21,13 @@ public class BouncingBall implements Runnable{
     private int speed;
     private double speedX;
     private double speedY;
+
+    private boolean enableMinimaze = false;
+    private int minimazeRate = 5;
+
+    public void setMinimaze(boolean s) {
+        enableMinimaze = s;
+    }
 
     // Конструктор класса BouncingBall
     public BouncingBall(Field field) {
@@ -65,21 +72,53 @@ public class BouncingBall implements Runnable{
 // В противном случае - активный поток заснѐт
                 field.canMove(this);
                 if (x + speedX <= radius) {
+                    if (enableMinimaze) {
+                        radius -= minimazeRate;
+                        if (radius <= 0)
+                        {
+                            break;
+                        }
+                        Thread.sleep(160-speed);
+                    }
 // Достигли левой стенки, отскакиваем право
                     speedX = -speedX;
                     x = radius;
                 } else
                 if (x + speedX >= field.getWidth() - radius) {
+                    if (enableMinimaze) {
+                        radius -= minimazeRate;
+                        if (radius <= 0)
+                        {
+                            break;
+                        }
+                        Thread.sleep(160-speed);
+                    }
 // Достигли правой стенки, отскок влево
                     speedX = -speedX;
                     x = new Double(field.getWidth() - radius).intValue();
                 } else
                 if (y + speedY <= radius) {
+                    if (enableMinimaze) {
+                        radius -= minimazeRate;
+                        if (radius <= 0)
+                        {
+                            break;
+                        }
+                        Thread.sleep(160-speed);
+                    }
                     // Достигли верхней стенки
                     speedY = -speedY;
                     y = radius;
                 } else
                 if (y + speedY >= field.getHeight() - radius) {
+                    if (enableMinimaze) {
+                        radius -= minimazeRate;
+                        if (radius <= 0)
+                        {
+                            break;
+                        }
+                        Thread.sleep(160-speed);
+                    }
 // Достигли нижней стенки
                     speedY = -speedY;
                     y = new Double(field.getHeight() - radius).intValue();

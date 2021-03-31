@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -17,6 +18,7 @@ public class MainFrame extends JFrame {
     private static final int HEIGHT = 500;
     private JMenuItem pauseMenuItem;
     private JMenuItem resumeMenuItem;
+    private JCheckBoxMenuItem minimazeMenuItem;
     // Поле, по которому прыгают мячи
     private Field field = new Field();
     // Конструктор главного окна приложения
@@ -68,6 +70,22 @@ public class MainFrame extends JFrame {
         resumeMenuItem.setEnabled(false);
 // Добавить в центр граничной компоновки поле Field
         getContentPane().add(field, BorderLayout.CENTER);
+        // Создать действие для реакции на активацию элемента "Наждачная бумага"
+        Action minimazeAction = new AbstractAction("Наждачная бумага")
+        {
+            public void actionPerformed(ActionEvent event)
+            {
+                field.setMinimaze(minimazeMenuItem.isSelected());
+                // свойство showAxis класса GraphicsDisplay истина, если элемент меню
+                // showAxisMenuItem отмечен флажком, и ложь - в противном случае
+                //display.setShowRotate(minimazeMenuItem.isSelected());
+            }
+        };
+        minimazeMenuItem = new JCheckBoxMenuItem(minimazeAction);
+        // Добавить соответствующий элемент в меню
+        controlMenu.add(minimazeMenuItem);
+        // Элемент по умолчанию включен (отмечен флажком)
+        minimazeMenuItem.setSelected(false);
     }
     // Главный метод приложения
     public static void main(String[] args) {
